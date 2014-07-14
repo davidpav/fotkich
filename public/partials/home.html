@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-8">
+  	<div ng-repeat="media in medias.data| orderBy : 'time' : 'true'" class="well">
+  		<h3>{{media.name}}</h3>
+  		<small>{{media.createdBy}} | {{media.time|date:'medium'}}</small>
+  		<p class="lead">{{media.description}}</p>
+  		<div ng-repeat="file in files[media.id]" style="width: 100px; margin: 5px; float: left">
+  			<img ng-src="{{file.url}}" alt="{{media.name}}" class="img-thumbnail">	
+  		</div>
+  		<div style="clear: both"></div>
+  		<p ng-repeat="comment in comments[media.id]">
+  			<strong>{{comment.commentBy}} {{comment.time |date:'medium'}}:</strong> {{comment.comment}}
+  		</p>
+  		<form>
+		  <div class="form-group">
+		    <input ng-model="newComment" type="text" ng-keyup="$event.keyCode == 13 ? addNewComment(media.id,newComment) : null"  class="form-control" id="groupName" placeholder="Add Comment">
+		  </div>  		
+		 </form>
+
+  	</div>
+  </div>
+  <div class="col-md-4">
+  	<div class="well">
+  		<h3>Upload Something New!</h3>
+  		<form role="form"
+  			enctype="multipart/form-data"
+          	action="/api/v1/upload"
+          	method="post">
+		  <div class="form-group">
+		    <label for="groupName">Group Name</label>
+		    <input type="text" ng-model="groupName" name="groupName" class="form-control" id="groupName" placeholder="Enter name">
+		  </div>
+		  <div class="form-group">
+		    <label for="groupDescription">Description</label>
+		    <textarea row="5" ng-model="groupDescription" name="groupDescription" class="form-control" id="name" placeholder="Enter Description"></textarea>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="exampleInputFile">File input</label>
+		    <input type="file" name="groupFiles" multiple="multiple">
+		    <p class="help-block">Example block-level help text here.</p>
+		  </div>
+
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+  	</div>
+  </div>
+</div>
