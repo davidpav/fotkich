@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+require('newrelic');
 var debug = require('debug')('fotkich');
-var app = require('../app');
+var app = require('../fotkich');
 
 app.set('port', process.env.PORT || 3000);
 

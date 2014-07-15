@@ -19,7 +19,7 @@ function HomeCntrl($scope,$http) {
 	};
 
 	$scope.addNewComment = function(groupId,commentToAdd) {
-		$scope.newComment = "";
+		$scope.newComment = "";		
 		$http.post('/api/v1/comments',{'groupId' : groupId,'comment' : commentToAdd}).success(function(data) {
 			console.log('Posting comment',groupId,commentToAdd);
 			loadComments(groupId);
